@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Glassroom | Product 01</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+	<style>
+		:root {
+			--ink: #152221;
+			--muted: #61706c;
+			--cream: #edf3ee;
+			--line: rgba(255, 255, 255, 0.62);
+			--glass: rgba(255, 255, 255, 0.48);
+			--lime: #d4f76a;
+			--coral: #ff806d;
+			--shadow: 0 24px 70px rgba(50, 83, 66, 0.14);
+		}
+
+		* { box-sizing: border-box; }
+		body {
+			margin: 0;
+			min-height: 100vh;
+			color: var(--ink);
+			background: #dcebe3;
+			font-family: "DM Sans", sans-serif;
+			overflow-x: hidden;
+		}
+
+		body::before, body::after {
+			content: "";
+			position: fixed;
+			z-index: -1;
+			border-radius: 50%;
+			filter: blur(2px);
+			pointer-events: none;
+		}
+		body::before { width: 43vw; height: 43vw; top: -18vw; right: -8vw; background: #bedc99; }
+		body::after { width: 34vw; height: 34vw; bottom: -14vw; left: -8vw; background: #ffc0ab; }
+
+		.shell { width: min(1180px, calc(100% - 48px)); margin: 0 auto; }
+		header { display: flex; align-items: center; justify-content: space-between; padding: 28px 0; }
+		.brand { display: flex; align-items: center; gap: 10px; font: 700 18px "Space Grotesk", sans-serif; letter-spacing: -0.04em; }
+		.brand-mark { width: 28px; height: 28px; display: grid; place-items: center; border: 1px solid var(--ink); border-radius: 50%; font-size: 12px; }
+		nav { display: flex; align-items: center; gap: 28px; color: var(--muted); font-size: 13px; }
+		nav a { color: inherit; text-decoration: none; }
+		.bag { display: flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 600; }
+		.bag-count { display: grid; place-items: center; width: 27px; height: 27px; border: 1px solid rgba(21,34,33,.3); border-radius: 50%; font-size: 12px; }
+
+		main { padding: 68px 0 110px; }
+		.eyebrow { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+		.eyebrow::before { content: ""; width: 30px; height: 1px; background: var(--coral); }
+		h1 { max-width: 750px; margin: 21px 0 44px; font: 600 clamp(3.8rem, 8vw, 7.3rem)/.9 "Space Grotesk", sans-serif; letter-spacing: -.085em; }
+		h1 span { color: var(--coral); }
+		.catalog-tools { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 18px; }
+		.search { position: relative; flex: 1; max-width: 390px; }
+		.search svg { position: absolute; top: 50%; left: 18px; width: 17px; height: 17px; transform: translateY(-50%); color: var(--muted); }
+		.search input { width: 100%; min-height: 48px; padding: 0 18px 0 48px; border: 1px solid var(--line); border-radius: 100px; outline: none; color: var(--ink); background: rgba(255,255,255,.42); font: 14px "DM Sans", sans-serif; backdrop-filter: blur(14px); }
+		.search input:focus { border-color: var(--ink); box-shadow: 0 0 0 3px rgba(212,247,106,.45); }
+		.result-count { color: var(--muted); font-size: 12px; }
+
+		.product-card { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(360px, .9fr); min-height: 560px; padding: 10px; border: 1px solid var(--line); border-radius: 26px; background: var(--glass); box-shadow: var(--shadow); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); }
+		.visual { position: relative; display: grid; place-items: center; min-height: 540px; overflow: hidden; border-radius: 19px; background: rgba(255,255,255,.32); }
+		.visual::before { content: ""; position: absolute; width: 64%; aspect-ratio: 1; border: 1px solid rgba(255,255,255,.8); border-radius: 50%; }
+		.visual::after { content: "01"; position: absolute; top: 28px; left: 30px; color: rgba(21,34,33,.4); font: 600 12px "Space Grotesk", sans-serif; letter-spacing: .12em; }
+		.visual img { position: relative; z-index: 1; width: min(58%, 320px); height: 370px; object-fit: contain; mix-blend-mode: multiply; filter: drop-shadow(22px 25px 16px rgba(45,68,54,.16)); transition: transform .5s ease; }
+		.visual:hover img { transform: translateY(-8px) rotate(2deg); }
+		.detail { display: flex; flex-direction: column; padding: 50px 42px 40px; }
+		.category { color: var(--coral); font-size: 12px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+		h2 { margin: 14px 0 14px; font: 600 clamp(1.8rem, 3vw, 2.7rem)/1.03 "Space Grotesk", sans-serif; letter-spacing: -.06em; }
+		.description { max-width: 390px; color: var(--muted); font-size: 14px; line-height: 1.7; }
+		.meta { display: flex; gap: 34px; margin: 31px 0; padding: 20px 0; border-top: 1px solid rgba(21,34,33,.13); border-bottom: 1px solid rgba(21,34,33,.13); }
+		.meta-label { margin-bottom: 6px; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .1em; }
+		.meta-value { font: 600 17px "Space Grotesk", sans-serif; }
+		.action-row { display: flex; align-items: center; gap: 15px; margin-top: auto; }
+		.primary { flex: 1; min-height: 54px; border: 0; border-radius: 100px; color: var(--ink); background: var(--lime); font: 700 13px "DM Sans", sans-serif; cursor: pointer; transition: transform .2s, background .2s; }
+		.primary:hover { transform: translateY(-2px); background: #e0ff80; }
+		.heart { width: 54px; height: 54px; border: 1px solid rgba(21,34,33,.25); border-radius: 50%; color: var(--ink); background: transparent; font-size: 21px; cursor: pointer; }
+		.status { margin-top: 22px; color: var(--muted); font-size: 12px; }
+		.status.error { color: #b74d3d; }
+		.collection { margin-top: 70px; }
+		.collection-heading { display: flex; align-items: end; justify-content: space-between; margin-bottom: 20px; }
+		.collection-heading h2 { margin: 0; font-size: 27px; }
+		.product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+		.product-tile { min-width: 0; padding: 10px; border: 1px solid var(--line); border-radius: 18px; color: var(--ink); background: rgba(255,255,255,.38); cursor: pointer; text-align: left; box-shadow: 0 12px 30px rgba(50,83,66,.08); transition: transform .25s, background .25s; }
+		.product-tile:hover, .product-tile:focus-visible { transform: translateY(-5px); background: rgba(255,255,255,.7); outline: none; }
+		.tile-image { display: grid; place-items: center; height: 205px; border-radius: 12px; background: rgba(255,255,255,.4); }
+		.tile-image img { width: 72%; height: 165px; object-fit: contain; mix-blend-mode: multiply; }
+		.tile-category { margin: 17px 5px 7px; overflow: hidden; color: var(--coral); font-size: 10px; font-weight: 700; letter-spacing: .12em; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
+		.tile-title { display: -webkit-box; height: 38px; margin: 0 5px; overflow: hidden; font: 600 14px/1.35 "Space Grotesk", sans-serif; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; }
+		.tile-footer { display: flex; justify-content: space-between; margin: 16px 5px 5px; font: 600 13px "Space Grotesk", sans-serif; }
+		.empty { grid-column: 1 / -1; padding: 35px; border: 1px dashed rgba(21,34,33,.25); border-radius: 16px; color: var(--muted); text-align: center; }
+		.skeleton { width: 58%; height: 320px; border-radius: 12px; background: linear-gradient(100deg, rgba(255,255,255,.25), rgba(255,255,255,.75), rgba(255,255,255,.25)); background-size: 200% 100%; animation: shimmer 1.3s infinite; }
+		@keyframes shimmer { to { background-position: -200% 0; } }
+		@media (max-width: 760px) {
+			.shell { width: min(100% - 28px, 580px); }
+			header { padding: 18px 0; } nav a { display: none; }
+			main { padding: 42px 0 60px; } h1 { margin-bottom: 28px; }
+			.product-card { display: block; padding: 7px; }
+			.visual { min-height: 360px; } .visual img { height: 260px; width: 58%; }
+			.detail { padding: 30px 24px 25px; min-height: 390px; }
+			.catalog-tools, .collection-heading { align-items: flex-start; flex-direction: column; }
+			.search { max-width: none; width: 100%; }
+			.product-grid { grid-template-columns: repeat(2, 1fr); }
+			.tile-image { height: 155px; } .tile-image img { height: 125px; }
+		}
+	</style>
+</head>
+<body>
+	<div class="shell">
+		<header>
+			<div class="brand"><span class="brand-mark">G</span> glassroom</div>
+			<nav><a href="#product">Discover</a><a href="#product">Journal</a><div class="bag">Bag <span class="bag-count">0</span></div></nav>
+		</header>
+
+		<main id="product">
+			<div class="eyebrow">Object of the day</div>
+			<h1>Something worth<br /><span>looking at.</span></h1>
+			<div class="catalog-tools">
+				<label class="search" for="productSearch">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+					<input id="productSearch" type="search" placeholder="Search the collection" autocomplete="off" />
+				</label>
+				<div class="result-count" id="resultCount">Curating collection...</div>
+			</div>
+			<section class="product-card" aria-live="polite">
+				<div class="visual" id="visual"><div class="skeleton" aria-label="Loading product image"></div></div>
+				<div class="detail">
+					<div class="category" id="category">Loading collection</div>
+					<h2 id="title">Finding your next favorite piece</h2>
+					<div class="description" id="description">A considered object, selected from today's collection. Give us a moment.</div>
+					<div class="meta">
+						<div><div class="meta-label">Price</div><div class="meta-value" id="price">--</div></div>
+						<div><div class="meta-label">Rating</div><div class="meta-value" id="rating">--</div></div>
+					</div>
+					<div class="action-row"><button class="primary" id="addButton" type="button">Add to bag</button><button class="heart" type="button" aria-label="Save product">&#9825;</button></div>
+					<div class="status" id="status">Connecting to the collection...</div>
+				</div>
+			</section>
+			<section class="collection" aria-labelledby="collectionTitle">
+				<div class="collection-heading"><h2 id="collectionTitle">The full collection</h2><div class="result-count">Select an object to view it above</div></div>
+				<div class="product-grid" id="productGrid"><div class="empty">Loading the full collection...</div></div>
+			</section>
+		</main>
+	</div>
+
+	<script>
+		const productUrl = 'https://fakestoreapi.com/products/1';
+		const productsUrl = 'https://fakestoreapi.com/products';
+		let products = [];
+		const elements = {
+			visual: document.querySelector('#visual'),
+			category: document.querySelector('#category'),
+			title: document.querySelector('#title'),
+			description: document.querySelector('#description'),
+			price: document.querySelector('#price'),
+			rating: document.querySelector('#rating'),
+			status: document.querySelector('#status'),
+			addButton: document.querySelector('#addButton'),
+			bagCount: document.querySelector('.bag-count'),
+			search: document.querySelector('#productSearch'),
+			grid: document.querySelector('#productGrid'),
+			resultCount: document.querySelector('#resultCount')
+		};
+
+		function renderProduct(product) {
+			elements.visual.innerHTML = `<img src="${product.image}" alt="${product.title}" />`;
+			elements.category.textContent = product.category;
+			elements.title.textContent = product.title;
+			elements.description.textContent = product.description;
+			elements.price.textContent = `$${product.price.toFixed(2)}`;
+			elements.rating.textContent = `${product.rating.rate} / 5`;
+			elements.status.textContent = 'Ready to ship · free delivery';
+		}
+
+		function renderGrid(items) {
+			elements.resultCount.textContent = `${items.length} objects available`;
+			if (!items.length) {
+				elements.grid.innerHTML = '<div class="empty">No objects match that search.</div>';
+				return;
+			}
+			elements.grid.innerHTML = items.map((product) => `
+				<button class="product-tile" type="button" data-product-id="${product.id}">
+					<div class="tile-image"><img src="${product.image}" alt="${product.title}" loading="lazy" /></div>
+					<div class="tile-category">${product.category}</div>
+					<div class="tile-title">${product.title}</div>
+					<div class="tile-footer"><span>$${product.price.toFixed(2)}</span><span>${product.rating.rate} / 5</span></div>
+				</button>
+			`).join('');
+		}
+
+		fetch(productUrl)
+			.then((res) => {
+				if (!res.ok) throw new Error(`Request failed: ${res.status}`);
+				return res.json();
+			})
+			.then(renderProduct)
+			.catch(() => {
+				elements.status.textContent = 'The collection is taking a breather. Please refresh to try again.';
+				elements.status.classList.add('error');
+			});
+
+		fetch(productsUrl)
+			.then((res) => {
+				if (!res.ok) throw new Error(`Request failed: ${res.status}`);
+				return res.json();
+			})
+			.then((data) => {
+				products = data;
+				renderGrid(products);
+			})
+			.catch(() => {
+				elements.grid.innerHTML = '<div class="empty">The collection could not be loaded. Please refresh to try again.</div>';
+				elements.resultCount.textContent = 'Collection unavailable';
+			});
+
+		elements.search.addEventListener('input', (event) => {
+			const query = event.target.value.trim().toLowerCase();
+			const filtered = products.filter((product) => `${product.title} ${product.category}`.toLowerCase().includes(query));
+			renderGrid(filtered);
+		});
+
+		elements.grid.addEventListener('click', (event) => {
+			const tile = event.target.closest('[data-product-id]');
+			if (!tile) return;
+			const product = products.find((item) => item.id === Number(tile.dataset.productId));
+			if (product) {
+				renderProduct(product);
+				document.querySelector('.product-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+			}
+		});
+
+		elements.addButton.addEventListener('click', () => {
+			elements.bagCount.textContent = '1';
+			elements.addButton.textContent = 'Added to bag';
+		});
+	</script>
+</body>
+</html>
